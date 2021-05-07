@@ -1,0 +1,2 @@
+<button class="focus:outline-none focus:bg-blue-300 bg-blue-400 m-2 block border-solid border-2 h-10 border-blue-200 text-center text-white  w-24 rounded-lg text-l mt-3 " type="submit">{{ $slot }} </button>
+                

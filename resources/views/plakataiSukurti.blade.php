@@ -8,7 +8,7 @@
                     
                     <div class="float-left w-1/2 pr-2">
                         Plakato sukūrimo forma
-                            <form action="{{ route("imagePreview") }}" method="POST">
+                            <form action="{{ route("sukurtiPlakata") }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <x-label for="title" :value="__('Titulinis užrašas')" class="mt-2"/>
                                 <x-input id="title" class="mt-1 w-full" type="text" name="title" required autofocus />
@@ -19,11 +19,11 @@
                                 <x-label for="footer" :value="__('Poraštė')" class="mt-2"/>
                                 <x-input id="footer" class="mt-1 w-full" type="text" name="footer" required autofocus />
 
-                                <x-label for="inputfile" :value="__('Failas negali viršyti 2mb ir turi būti .gif arba .jpg formatas ')" class="mt-2"/>
-                                <input type="file" id="inputfile" class="text-lg border-none border-0 bg-red-300 mt-3" :value="__('Paveiklsiukas')"/> 
+                                <x-label for="file" :value="__('Failas negali viršyti 2mb ir turi būti .gif arba .jpg formatas ')" class="mt-2"/>
+                                <input type="file" id="file" name="file" class="text-lg border-none border-0 bg-red-300 mt-3" :value="__('Paveiklsiukas')"/> 
                                 </br>
                                 <div class="w-full justify-center">
-                                <x-button class="mt-2">Peržiūra</x-button>
+                                <x-button class="mt-2">Kurti</x-button>
                                 </div>
                             </form>
                     </div>
