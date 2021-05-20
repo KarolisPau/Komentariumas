@@ -52,42 +52,6 @@ class KomentarasController extends Controller
         
         return redirect()->back()->with('success', 'Komentaras parašytas');
 
-        
-        
-        // public function store(Request $request)
-    // {
-    //     $i = 0;
-    //     $id = Auth::id();
-
-    //     $request->validate([
-    //         'title' => 'required',
-    //         'header' => 'required',
-    //         'file' => 'image|mimes:jpg,jpeg,gif|max:2048',
-    //         'footer' => 'required',
-    //     ]);
-
-    //     $fileName = $request->file->getClientOriginalName();
-    //     $fileExt = $request->file->getClientOriginalExtension();
-    //     $fileNameOnly = explode('.', $fileName)[0];
-
-    //     if (file_exists(public_path('images/' . $fileName))) {
-    //         while (file_exists(public_path('images/' . $fileName))) {
-    //             $i++;
-    //             $fileName = $fileNameOnly . '' . $i . '.' . $fileExt;
-    //         }
-    //     }
-    //     $request->file->move(public_path('images'), $fileName);
-
-    //     Plakatas::create([
-    //         'title' => $request['title'],
-    //         'header' => $request['header'],
-    //         'footer' => $request['footer'],
-    //         'img' => '/images/' . $fileName,
-    //         'user_id' => $id
-    //     ]);
-    //     return redirect()->route('sukurtiPlakata')->with('success', 'Plakatas sėkmingai sukurtas');
-    // }
-
     }
 
     /**

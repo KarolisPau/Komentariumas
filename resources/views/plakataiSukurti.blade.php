@@ -6,10 +6,10 @@
 
                 <div class="p-6 bg-white border-b border-gray-200">
                     
-                    <div class="float-left w-1/2 pr-2">
+                    <div class="pr-2">
                         Plakato sukūrimo forma
-                            <form action="{{ route("sukurtiPlakata") }}" method="post" enctype="multipart/form-data">
-                                @csrf
+                            {{-- <form action="{{ route("sukurtiPlakata") }}" method="post" enctype="multipart/form-data">
+                                @csrf --}}
                                 <x-label for="title" :value="__('Titulinis užrašas')" class="mt-2"/>
                                 <x-input id="title" class="mt-1 w-full" type="text" name="title" required autofocus />
 
@@ -25,17 +25,90 @@
                                 <div class="w-full justify-center">
                                 <x-button class="mt-2">Kurti</x-button>
                                 </div>
-                            </form>
+                            
                     </div>
 
+                    <div id="outerContainer"> 
+                       <div id="container">
+                        <div id="item">
+                  
+                        </div>
+                      </div>
+                    </div>
                     
                 
-                    <div class="float-right w-1/2 mt-1">
-                    <x-image-preview class="h-96 w-full mt-1 " :value="__('/images/tankas.jpg')"></x-image-preview>
-                    </div>
+                    
+                    @livewire('rodyti-foto')
+                    
+                {{-- </form> --}}
                 </div>
             </div>
         </div>
     </div>
 
+    <script>
+      var dragItem = document.querySelector("#item");
+      var container = document.querySelector("#container");
+  
+      var active = false;
+      var currentX;
+      var currentY;
+      var initialX;
+      var initialY;
+      var xOffset = 0;
+      var yOffset = 0;
+  
+      container.addEventListener("touchstart", dragStart, false);
+      container.addEventListener("touchend", dragEnd, false);
+      container.addEventListener("touchmove", drag, false);
+  
+      container.addEventListener("mousedown", dragStart, false);
+      container.addEventListener("mouseup", dragEnd, false);
+      container.addEventListener("mousemove", drag, false);
+  
+      function dragStart(e) {
+        if (e.type === "touchstart") {
+          initialX = e.touches[0].clientX - xOffset;
+          initialY = e.touches[0].clientY - yOffset;
+        } else {
+          initialX = e.clientX - xOffset;
+          initialY = e.clientY - yOffset;
+        }
+  
+        if (e.target === dragItem) {
+          active = true;
+        }
+      }
+  
+      function dragEnd(e) {
+        initialX = currentX;
+        initialY = currentY;
+  
+        active = false;
+      }
+  
+      function drag(e) {
+        if (active) {
+        
+          e.preventDefault();
+        
+          if (e.type === "touchmove") {
+            currentX = e.touches[0].clientX - initialX;
+            currentY = e.touches[0].clientY - initialY;
+          } else {
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+          }
+  
+          xOffset = currentX;
+          yOffset = currentY;
+  
+          setTranslate(currentX, currentY, dragItem);
+        }
+      }
+  
+      function setTranslate(xPos, yPos, el) {
+        el.style.transform = "translate3d(" + xPos + "px, " + yPos + "px, 0)";
+      }
+    </script>
 </x-app-layout>

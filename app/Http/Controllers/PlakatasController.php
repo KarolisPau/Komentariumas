@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Plakatas;
-use Illuminate\Contracts\Session\Session;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Komentaras;
+use Image;
 
 class PlakatasController extends Controller
 {
@@ -84,10 +84,12 @@ class PlakatasController extends Controller
         // $komentarai = Komentaras::join('users', 'komentaras.user_id', '=', 'user_id')
         //        ->get(['users.*', 'name']);
 
-       // $komentarai = Komentaras::where('plakatas_id', $id)->get();
+        // $komentarai = Komentaras::where('plakatas_id', $id)->get();
 
-       $komentarai = Komentaras::where('plakatas_id', $id)->join('users', 'komentaras.user_id', '=', 'users.id')->get(['users.name', 'comment']);
-       
+        $komentarai = Komentaras::where('plakatas_id', $id)
+            ->join('users', 'komentaras.user_id', '=', 'users.id')
+            ->get(['users.name', 'comment']);
+
         $plakatai = Plakatas::where('id', $id)->get();
         session(['plakato_id' => $id]);
         return view('plakatas', compact("plakatai", "komentarai"));
@@ -127,52 +129,11 @@ class PlakatasController extends Controller
         //
     }
 
-    function showtop()
-    {
-        return view('plakataitop');
-    }
-    function showpop()
-    {
-        return view('plakataipop');
-    }
-    function createPoster()
-    {
+    public function kurimoForma(){
         return view('plakataiSukurti');
     }
-    function imagePreview(Request $request)
-    {
 
-        $request->validate([
-            'file' => 'image|mimes:jpg,jpeg,gif|max:2048',
-        ]);
-        echo ($request->file);
-
-
-        $fileName = $request->file->getClientOriginalName();
-        $request->file->move(public_path('images'), $fileName);
-        return $fileName;
+    public function showtop(){
+        return view('plakataitop');
     }
 }
-
-    // public function updateSocial(Request $request){
-    //     $id = Auth::user()->id; 
-    //     $vardas = $request->input('name');
-    //     $fb = $request->input('fb');
-    //     $insta = $request->input('insta');
-    //     $intro = $request->input('intro');
-    //     if($vardas != null){
-    //         UserSettings::where('user_id', $id)->update(['user_name' => $vardas]);
-    //     }
-    //     if($fb != null){
-    //         UserSettings::where('user_id', $id)->update(['user_fb_page' => $fb]);
-    //     }
-    //     if($insta != null){
-    //         UserSettings::where('user_id', $id)->update(['user_insta_page' => $insta]);
-    //     }
-    //     if($intro != null){
-    //         UserSettings::where('user_id', $id)->update(['user_introduction' => $intro]);
-    //     }
-    //     return redirect()->route('social', ['locale' => 'lt']);
-        
-    // }
-// }

@@ -15,6 +15,46 @@
 
         <!-- Scripts -->
         <script src="{{ asset('js/app.js') }}" defer></script>
+        <style>
+            #container {
+              width: 100%;
+              height: 400px;
+              background-color: #333;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+              border-radius: 7px;
+              touch-action: none;
+            }
+
+            #container2{
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              overflow: hidden;
+              border-radius: 7px;
+              touch-action: none;
+            }
+            #item {
+              width: 100px;
+              height: 100px;
+              background-color: rgb(245, 230, 99);
+              border: 10px solid rgba(136, 136, 136, .5);
+              border-radius: 50%;
+              touch-action: none;
+              user-select: none;
+            }
+            
+            #item:active {
+              background-color: rgba(168, 218, 220, 1.00);
+            }
+            #item:hover {
+              cursor: pointer;
+              border-width: 20px;
+            }
+          </style>
+        @livewireStyles
     </head>
     <body class="font-sans antialiased ">
         <div class="min-h-screen bg-gray-100">
@@ -24,5 +64,6 @@
                 {{ $slot }}
             </main>
         </div>
+        @livewireScripts
     </body>
 </html>

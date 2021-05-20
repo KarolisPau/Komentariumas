@@ -80,10 +80,13 @@
                     <x-slot name="content">
                         
 
-                            <x-dropdown-link :href="route('createPoster')">              
+                            <x-dropdown-link :href="route('plakatoForma')">              
                                 {{ __('Sukurti Plakatą') }}
                             </x-dropdown-link>
                        
+                            <x-dropdown-link :href="route('ApiForma')" class="bg-red-200">              
+                                {{ __('Meme API') }}
+                            </x-dropdown-link>
 
                             <x-dropdown-link :href="route('settings')">
                                 {{ __('Paskyros nustatymai') }}
